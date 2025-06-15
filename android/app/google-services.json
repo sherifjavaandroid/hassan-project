@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "910106297295",
+    "firebase_url": "https://call-404b7-default-rtdb.firebaseio.com",
+    "project_id": "call-404b7",
+    "storage_bucket": "call-404b7.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:910106297295:android:a608472baebc67cc33c8ba",
+        "android_client_info": {
+          "package_name": "com.example.derm_aid_new"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB_GdyyGbodOud-7_BSvD6u-KxiEmr8Tf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
