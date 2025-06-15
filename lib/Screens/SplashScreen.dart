@@ -39,10 +39,10 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Derm",
+              Text("Derma",
                 style: TextStyle(fontSize: 60,fontWeight: FontWeight.w900,color: Color.fromRGBO(19, 35, 70, 1),),
               ),
-              Text("Aid",
+              Text("scan",
                 style: TextStyle(fontSize: 60,fontWeight: FontWeight.w900,color: Color.fromRGBO(74, 213, 205, 1)),
               ),
             ],

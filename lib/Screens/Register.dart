@@ -44,10 +44,10 @@ class _RegisterState extends State<Register> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text("Derm",
+                        Text("Derma",
                           style: TextStyle(fontSize: 50,fontWeight: FontWeight.w900,color: Color.fromRGBO(19, 35, 70, 1),),
                         ),
-                        Text("Aid",
+                        Text("Scan",
                           style: TextStyle(fontSize: 50,fontWeight: FontWeight.w900,color: Color.fromRGBO(74, 213, 205, 1)),
                         ),
                       ],
