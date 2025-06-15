@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:derm_aid/Screens/DoctorSearch.dart';
 import 'package:derm_aid/Services/Database.dart';
 import 'package:flutter/material.dart';
+import 'package:tflite_flutter/tflite_flutter.dart';
 
 import '../Widgets/NumStepper.dart';
 
@@ -18,6 +19,8 @@ class _ResultState extends State<Result> {
   var data1;
   List? _outputs;
   bool _isLoading = true;
+  late Interpreter _interpreter;
+
 
   @override
   void initState() {
@@ -36,7 +39,7 @@ class _ResultState extends State<Result> {
 
   Future<void> _loadModel() async {
     try {
-      // تحميل النموذج من assets
+      // تحميل النموذج من assets باستخدام tflite_flutter
       _interpreter = await Interpreter.fromAsset('assets/Model/converted_model.tflite');
       print("Model loaded successfully!");
     } catch (e) {
@@ -45,25 +48,42 @@ class _ResultState extends State<Result> {
   }
 
 
-  Future<void> _runInference(XFile image) async {
-    var output = await Tflite.runModelOnImage(
-      path: image.path,
-      numResults: 2,
-      threshold: 0.5,
-      imageMean: 127.5,
-      imageStd: 127.5,
-    );
 
-    setState(() {
-      _outputs = output;
-    });
+  Future<void> _runInference(XFile image) async {
+    try {
+      // تحويل الصورة إلى صيغة يمكن استخدامها مع Interpreter
+      var inputImage = await _processImage(image);  // تأكد من معالجة الصورة إذا لزم الأمر
+
+      // تحديد مصفوفة لاحتواء النتائج
+      var output = List.filled(2, 0).reshape([1, 2]);  // افتراض أن النموذج ينتج 2 نتيجة (تأكد من أبعاد الخرج)
+
+      // تشغيل الاستدلال باستخدام Interpreter
+      _interpreter.run(inputImage, output);
+
+      setState(() {
+        _outputs = output;
+      });
+    } catch (e) {
+      print('Error running inference: $e');
+    }
+  }
+
+// دالة معالجة الصورة (يمكنك تعديلها حسب احتياجك)
+  Future<List<int>> _processImage(XFile image) async {
+    // قم بتحويل الصورة هنا حسب الحاجة (مثلاً تغيير الحجم أو تحويلها إلى قائمة)
+    // تأكد من استخدام نفس التنسيق الذي يتوقعه النموذج
+
+    // كمثال، هنا سنفترض أن الصورة هي قائمة من الأرقام (مثال)
+    var imageBytes = await image.readAsBytes();
+    return imageBytes;
   }
 
   @override
   void dispose() {
-    Tflite.close();
+    _interpreter.close(); // إغلاق الـ Interpreter لتفريغ الموارد
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {

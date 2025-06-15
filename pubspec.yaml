@@ -57,6 +57,7 @@ dependencies:
   path: ^1.9.0
   firebase_storage: ^11.6.10
   flutter_svg: ^2.0.10+1
+  image: ^4.5.4
 dev_dependencies:
   flutter_test:
     sdk: flutter
